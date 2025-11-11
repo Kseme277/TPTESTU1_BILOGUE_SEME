@@ -5,6 +5,7 @@
 package com.stjean.tptestu1_bilogue_seme;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -109,4 +110,62 @@ public class Utilisateur {
 	public void setId(int id) {
 		this.id = id;
 	}
+        
+        public static void supprimer(int id) throws SuppressionInvalidException {
+        boolean trouve = false;
+        for (Utilisateur u : users) {
+            if (u.id == id) {
+                users.remove(u);
+                trouve = true;
+                break;
+            }
+        }
+        if (!trouve) {
+            throw new SuppressionInvalidException("Utilisateur avec ID " + id + " inexistant.");
+        }
+    }
+        public static List<Utilisateur> lister() {
+        return new ArrayList<>(users);
+    }
+        public static double analyseSoldeGeneral() throws NegativeGeneralBalanceException {
+        double total = 0;
+        for (Utilisateur u : users) {
+            total += u.soldePersonnel;
+        }
+        if (total < 0) {
+            throw new NegativeGeneralBalanceException("Solde général négatif : " + total);
+        }
+        return total;
+    }
+    
+    /**
+     * Retourne l'utilisateur le plus riche.
+     * @return Utilisateur
+     */
+    public static Utilisateur utilisateurLePlusRiche() {
+        if (users.isEmpty()) {
+            return null;
+        }
+        Utilisateur riche = users.get(0);
+        for (Utilisateur u : users) {
+            if (u.soldePersonnel > riche.soldePersonnel) {
+                riche = u;
+            }
+        }
+        return riche;
+    }
+    
+    // toString pour affichage
+    @Override
+    public String toString() {
+        return "Utilisateur [id=" + id + ", nom=" + nom + ", solde=" + soldePersonnel + "]";
+    }
+    public static Utilisateur afficher(int id) {
+        for (Utilisateur u : users) {
+            if (u.id == id) {
+                return u;
+            }
+        }
+        return null;
+    }
 }
