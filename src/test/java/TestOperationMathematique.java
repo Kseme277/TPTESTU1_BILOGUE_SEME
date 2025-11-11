@@ -41,6 +41,7 @@ class TestOperationMathematique {
         assertEquals(1, op.factoriel(0));
         assertEquals(1, op.factoriel(1));
         assertEquals(120, op.factoriel(5));
+		assertThrows(IllegalParamException.class, () -> op.factoriel(-1));
         
     }
 
