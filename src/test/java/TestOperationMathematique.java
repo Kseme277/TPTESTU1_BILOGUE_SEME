@@ -53,5 +53,11 @@ class TestOperationMathematique {
 		assertArrayEquals(new int[]{1}, op.trier(new int[]{1}));
 		assertArrayEquals(new int[]{}, op.trier(new int[]{}));
 	}
+	@Test
+	void testMaxNumba() {
+		assertEquals(3.0, op.maxNumba(new double[]{1.0, 3.0, 2.0}));
+		assertEquals(-1.0, op.maxNumba(new double[]{-1.0}));
+		assertThrows(IllegalArgumentException.class, () -> op.maxNumba(new double[]{}));
+	}
 
 }
