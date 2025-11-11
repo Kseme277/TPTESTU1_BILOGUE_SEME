@@ -109,4 +109,21 @@ public class Utilisateur {
 	public void setId(int id) {
 		this.id = id;
 	}
+        
+        public static void supprimer(int id) throws SuppressionInvalidException {
+        boolean trouve = false;
+        for (Utilisateur u : users) {
+            if (u.id == id) {
+                users.remove(u);
+                trouve = true;
+                break;
+            }
+        }
+        if (!trouve) {
+            throw new SuppressionInvalidException("Utilisateur avec ID " + id + " inexistant.");
+        }
+    }
+        public static List<Utilisateur> lister() {
+        return new ArrayList<>(users);
+    }
 }
