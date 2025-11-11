@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.stjean.tptestu1_bilogue_seme;
+package com.stjean.operation;
 
 /**
  *
