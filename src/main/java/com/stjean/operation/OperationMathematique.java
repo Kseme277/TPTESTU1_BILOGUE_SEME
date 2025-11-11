@@ -24,4 +24,22 @@ public class OperationMathematique {
         }
         return resultat;
     }
+    
+    public int[] trier(int[] listes) {
+    if (listes == null || listes.length == 0) {
+        return new int[0];
+    }
+    int[] copie = listes.clone();
+    // Tri à bulles simple (décroissant)
+    for (int i = 0; i < copie.length - 1; i++) {
+        for (int j = 0; j < copie.length - i - 1; j++) {
+            if (copie[j] < copie[j + 1]) {
+                int temp = copie[j];
+                copie[j] = copie[j + 1];
+                copie[j + 1] = temp;
+            }
+        }
+    }
+    return copie;
+}
 }
