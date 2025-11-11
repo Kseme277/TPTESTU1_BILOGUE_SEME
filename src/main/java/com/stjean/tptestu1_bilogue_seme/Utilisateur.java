@@ -4,6 +4,8 @@
  */
 package com.stjean.tptestu1_bilogue_seme;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author kseme
@@ -16,6 +18,7 @@ public class Utilisateur {
     private String telephone;
     private String ville;
     private double soldePersonnel;
+    private static ArrayList<Utilisateur> users = new ArrayList<>();
     
     
     public Utilisateur(int id, String nom, int age, String email, String telephone, String ville, double soldePersonnel) {
@@ -27,7 +30,16 @@ public class Utilisateur {
         this.setVille(ville);
         this.setSoldePersonnel(soldePersonnel);
     }
+    private static boolean validerEmail(String email) {
+        return email != null && email.contains("@") && email.contains(".");
+    }
 
+    public static void ajouter(Utilisateur user) throws EmailInvalidException {
+        if (!validerEmail(user.email)) {
+            throw new EmailInvalidException("Email invalide : format incorrect.");
+        }
+        users.add(user);
+    }
 
 	public double getSoldePersonnel() {
 		return soldePersonnel;
