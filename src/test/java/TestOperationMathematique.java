@@ -44,4 +44,13 @@ class TestOperationMathematique {
         
     }
 
+	// Ajouts aux tests existants
+
+	@Test
+	void testTrier() {
+		assertArrayEquals(new int[]{5, 4, 3, 1, 1}, op.trier(new int[]{3, 1, 4, 1, 5}));
+		assertArrayEquals(new int[]{1}, op.trier(new int[]{1}));
+		assertArrayEquals(new int[]{}, op.trier(new int[]{}));
+	}
+
 }
