@@ -14,7 +14,10 @@ public class OperationMathematique {
     }
     
   
-    public long factoriel(int nombre) {
+    public long factoriel(int nombre) throws IllegalParamException {
+        if (nombre < 0) {
+            throw new IllegalParamException("Le factoriel d'un nombre négatif n'existe pas.");
+        }
         if (nombre == 0 || nombre == 1) {
             return 1;
         }
