@@ -50,5 +50,28 @@ class TestUtilisateur {
         assertEquals(0, Utilisateur.lister().size());
         assertThrows(SuppressionInvalidException.class, () -> Utilisateur.supprimer(999));
     }
-	
+    @Test
+    void testAfficher() throws EmailInvalidException {
+        Utilisateur.ajouter(user1);
+        assertEquals(user1, Utilisateur.afficher(1));
+        assertNull(Utilisateur.afficher(999));
+    }
+    
+    @Test
+    void testAnalyseSoldeGeneral() throws EmailInvalidException, NegativeGeneralBalanceException {
+        Utilisateur.ajouter(new Utilisateur(1, "A", 30, "a@email.com", "123", "P", 1000.0));
+        Utilisateur.ajouter(new Utilisateur(2, "B", 25, "b@email.com", "456", "L", 500.0));
+        assertEquals(1500.0, Utilisateur.analyseSoldeGeneral());
+        
+        // Test exception négatif
+        Utilisateur.ajouter(new Utilisateur(3, "C", 20, "c@email.com", "789", "M", -3000.0));
+        assertThrows(NegativeGeneralBalanceException.class, () -> Utilisateur.analyseSoldeGeneral());
+    }
+    
+    @Test
+    void testUtilisateurLePlusRiche() throws EmailInvalidException {
+        Utilisateur.ajouter(user1); // 1000
+        Utilisateur.ajouter(user2); // -500
+        assertEquals(user1, Utilisateur.utilisateurLePlusRiche());
+    }
 }
